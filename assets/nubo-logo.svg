@@ -1,0 +1,13 @@
+<svg width="190" height="58" viewBox="0 0 190 58" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Nubo</title>
+  <desc id="desc">Logo SVG da marca Nubo com monograma N em um bloco grafite.</desc>
+  <path d="M18 9H44C51 9 56 14 56 21V37C56 44 51 49 44 49H18C11 49 6 44 6 37V21C6 14 11 9 18 9Z" fill="#191611"/>
+  <path d="M18 37V21H26L40 37V21" stroke="#FFF7ED" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M43 13C50 18 53 26 52 35" stroke="#F05A3C" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="49" cy="41" r="5" fill="#F4B740"/>
+  <path d="M74 38V17H80L93 31V17H99V38H93L80 24V38H74Z" fill="#191611"/>
+  <path d="M111 38.4C106 38.4 102.6 35.2 102.6 30.4V21.7H108.3V30.1C108.3 32.3 109.5 33.6 111.5 33.6C113.6 33.6 114.9 32.1 114.9 29.9V21.7H120.6V38H115.2V36C114.1 37.5 112.6 38.4 111 38.4Z" fill="#191611"/>
+  <path d="M135 38.4C132.7 38.4 130.9 37.6 129.7 36.1V38H124.3V16H130V23.5C131.2 22.1 133 21.3 135.1 21.3C139.6 21.3 143.2 24.9 143.2 29.8C143.2 34.7 139.5 38.4 135 38.4ZM133.6 33.7C135.9 33.7 137.6 32 137.6 29.8C137.6 27.6 135.9 25.9 133.6 25.9C131.3 25.9 129.6 27.6 129.6 29.8C129.6 32 131.3 33.7 133.6 33.7Z" fill="#191611"/>
+  <path d="M155.3 38.4C150.2 38.4 146.3 34.7 146.3 29.8C146.3 24.9 150.2 21.3 155.3 21.3C160.4 21.3 164.3 24.9 164.3 29.8C164.3 34.7 160.4 38.4 155.3 38.4ZM155.3 33.7C157.6 33.7 159 32.1 159 29.8C159 27.5 157.6 25.9 155.3 25.9C153 25.9 151.6 27.5 151.6 29.8C151.6 32.1 153 33.7 155.3 33.7Z" fill="#191611"/>
+  <path d="M74 45H152" stroke="#F05A3C" stroke-width="3" stroke-linecap="round"/>
+</svg>
