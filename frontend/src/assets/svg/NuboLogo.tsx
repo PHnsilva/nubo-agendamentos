@@ -1,15 +1,28 @@
 export function NuboLogo() {
   return (
-    <svg className="logo-mark" viewBox="0 0 190 58" role="img" aria-label="Nubo">
-      <path d="M18 9h26c7 0 12 5 12 12v16c0 7-5 12-12 12H18C11 49 6 44 6 37V21C6 14 11 9 18 9Z" fill="#07111F" />
-      <path d="M18 37V21h8l14 16V21" fill="none" stroke="#F7F4EC" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4.4" />
-      <path d="M43 13c7 5 10 13 9 22" fill="none" stroke="#E85D04" strokeLinecap="round" strokeWidth="4" />
-      <circle cx="49" cy="41" r="5" fill="#B77900" />
-      <path d="M74 38V17h6l13 14V17h6v21h-6L80 24v14H74Z" fill="#07111F" />
-      <path d="M111 38.4c-5 0-8.4-3.2-8.4-8v-8.7h5.7v8.4c0 2.2 1.2 3.5 3.2 3.5 2.1 0 3.4-1.5 3.4-3.7v-8.2h5.7V38h-5.4v-2c-1.1 1.5-2.6 2.4-4.2 2.4Z" fill="#07111F" />
-      <path d="M135 38.4c-2.3 0-4.1-.8-5.3-2.3V38h-5.4V16h5.7v7.5c1.2-1.4 3-2.2 5.1-2.2 4.5 0 8.1 3.6 8.1 8.5s-3.7 8.6-8.2 8.6Zm-1.4-4.7c2.3 0 4-1.7 4-3.9 0-2.2-1.7-3.9-4-3.9s-4 1.7-4 3.9c0 2.2 1.7 3.9 4 3.9Z" fill="#07111F" />
-      <path d="M155.3 38.4c-5.1 0-9-3.7-9-8.6 0-4.9 3.9-8.5 9-8.5s9 3.6 9 8.5-3.9 8.6-9 8.6Zm0-4.7c2.3 0 3.7-1.6 3.7-3.9 0-2.3-1.4-3.9-3.7-3.9s-3.7 1.6-3.7 3.9c0 2.3 1.4 3.9 3.7 3.9Z" fill="#07111F" />
-      <path d="M74 45h78" stroke="#E85D04" strokeLinecap="round" strokeWidth="3" />
+    <svg className="logo-mark" viewBox="0 0 226 72" role="img" aria-label="Nubo">
+      <defs>
+        <linearGradient id="nuboOrange" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stopColor="#ff8a00" />
+          <stop offset="100%" stopColor="#e85d04" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M19 49V29c0-8 9.6-11.9 15.2-6.2l24.6 25c5.6 5.7 15.2 1.7 15.2-6.3V20"
+        fill="none"
+        stroke="#071f3d"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="13"
+      />
+      <circle cx="19" cy="49" r="8" fill="url(#nuboOrange)" stroke="#071f3d" strokeWidth="7" />
+      <circle cx="74" cy="20" r="11" fill="#fff8ef" stroke="url(#nuboOrange)" strokeWidth="7" />
+      <path
+        d="M32 9c-10 0-18 8.1-18 18.1 0 13.4 18 32.3 18 32.3S50 40.5 50 27.1C50 17.1 42 9 32 9Zm0 25a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"
+        fill="url(#nuboOrange)"
+      />
+      <path d="M100 53V19h9.4l18.1 20.4V19h10.2v34h-9.3l-18.2-20.4V53H100Zm59.5.7c-9.1 0-14.9-5.8-14.9-14.7V24.8h10.2v13.6c0 4.1 2.1 6.4 5.8 6.4 3.9 0 6.2-2.7 6.2-6.8V24.8H177V53h-9.7v-3.5c-2 2.6-4.6 4.2-7.8 4.2Zm35.1 0c-4.2 0-7.4-1.4-9.6-4V53h-9.7V17h10.2v11.9c2.2-2.7 5.5-4.4 9.4-4.4 8.1 0 14.5 6.4 14.5 14.5 0 8.2-6.6 14.7-14.8 14.7Zm-2.4-8.2c4.2 0 7.2-2.9 7.2-6.6s-3-6.5-7.2-6.5c-4.1 0-7.1 2.8-7.1 6.5s3 6.6 7.1 6.6Z" fill="#071f3d" />
+      <path d="M213.1 53.7c-9.2 0-16.2-6.4-16.2-14.7 0-8.2 7-14.5 16.2-14.5 9.1 0 16.1 6.3 16.1 14.5 0 8.3-7 14.7-16.1 14.7Zm0-8.2c4 0 6.6-2.7 6.6-6.5s-2.6-6.4-6.6-6.4c-4.1 0-6.7 2.6-6.7 6.4s2.6 6.5 6.7 6.5Z" fill="#071f3d" />
     </svg>
   );
 }
