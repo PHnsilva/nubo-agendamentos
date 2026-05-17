@@ -1,123 +1,119 @@
-import { FormEvent, useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
-import { Icon } from '../components/ui/Icon';
-import { apiClient } from '../services/apiClient';
-import type { ProviderSummary } from '../types/api';
-import { currency, initials } from '../utils/format';
+import { Link } from 'react-router-dom';
+import { NuboLogo } from '../assets/svg/NuboLogo';
+import { BrowserFrame, WireframeNav } from '../components/layout/WireframeNav';
+import { Icon, type IconName } from '../components/ui/Icon';
+
+const categories: Array<{ label: string; icon: IconName }> = [
+  { label: 'Elétrica', icon: 'plug' },
+  { label: 'Hidráulica', icon: 'droplet' },
+  { label: 'Pintura', icon: 'paint' },
+  { label: 'Montagem', icon: 'tools' },
+  { label: 'Limpeza', icon: 'spark' },
+];
+
+const providers = [
+  { name: 'Marcos Silva', role: 'Eletricista', rating: '4,9' },
+  { name: 'João Ferreira', role: 'Encanador', rating: '4,8' },
+  { name: 'Rafaela Souza', role: 'Pintora', rating: '4,7' },
+  { name: 'Carlos Mendes', role: 'Montador de Móveis', rating: '4,8' },
+  { name: 'Juliana Lima', role: 'Limpeza', rating: '4,6' },
+  { name: 'Paulo Andrade', role: 'Eletricista', rating: '4,7' },
+];
+
+function SearchProviderCard({ provider }: { provider: (typeof providers)[number] }) {
+  return (
+    <article className="search-provider-card">
+      <span className="avatar-placeholder"><Icon name="user" /></span>
+      <div>
+        <h3>{provider.name}</h3>
+        <p>{provider.role}</p>
+        <span className="stars">★★★★★ <b>{provider.rating}</b></span>
+        <span className="verified"><Icon name="shield" /> Verificado</span>
+      </div>
+      <Icon className="bookmark" name="bookmark" />
+      <Link className="wire-button wire-button--ghost" to="/prestadores/1">Ver perfil</Link>
+    </article>
+  );
+}
+
+function FilterPanel({ compact = false }: { compact?: boolean }) {
+  return (
+    <aside className={compact ? 'filter-sheet' : 'filter-panel'}>
+      <div className="filter-panel__head"><h2>Filtros</h2>{!compact && <button type="button">Limpar</button>}<button className="filter-close" type="button"><Icon name="x" /></button></div>
+      <label className="filter-row"><Icon name="briefcase" /><span>Tipo de serviço</span><b>{compact ? '' : 'Todos os serviços'}</b><Icon name="chevronDown" /></label>
+      <label className="filter-row"><Icon name="location" /><span>Distância</span><b>Até 10 km</b><Icon name="chevronDown" /></label>
+      <label className="filter-row"><Icon name="star" /><span>Avaliação mínima</span><b>4,0+</b><Icon name="chevronDown" /></label>
+      <button className="wire-cta filter-apply" type="button">Aplicar filtros</button>
+    </aside>
+  );
+}
+
+function SearchPhonePreview() {
+  return (
+    <div className="phone-shell search-phone">
+      <div className="phone-status"><span>9:41</span><i /><span>▴ ◔ ▰</span></div>
+      <div className="phone-screen-content">
+        <div className="phone-top-row">
+          <button className="location-chip" type="button"><Icon name="location" /> São Paulo, SP <Icon name="chevronDown" /></button>
+          <button className="icon-square" type="button"><Icon name="sliders" /></button>
+        </div>
+        <div className="phone-search"><Icon name="search" /><span>Buscar serviço ou profissional...</span></div>
+        <div className="phone-category-row">
+          {categories.slice(0, 3).map((item) => <div className="phone-category" key={item.label}><Icon name={item.icon} /><span>{item.label}</span></div>)}
+        </div>
+        {providers.slice(0, 2).map((provider) => (
+          <article className="phone-result-card" key={provider.name}>
+            <span className="avatar-placeholder"><Icon name="user" /></span>
+            <div><h3>{provider.name}</h3><p>{provider.role}</p><span className="stars">★★★★★ <b>{provider.rating}</b></span><span className="verified"><Icon name="shield" /> Verificado</span></div>
+            <Icon className="bookmark" name="bookmark" />
+          </article>
+        ))}
+      </div>
+      <FilterPanel compact />
+    </div>
+  );
+}
 
 export function ProvidersPage() {
-  const [searchParams] = useSearchParams();
-  const [providers, setProviders] = useState<ProviderSummary[]>([]);
-  const [error, setError] = useState('');
-  const [filters, setFilters] = useState({
-    city: '',
-    category: searchParams.get('category') ?? '',
-    service: '',
-    minRating: '',
-    maxPrice: '',
-    availableDate: '',
-  });
-
-  async function loadProviders(nextFilters = filters) {
-    try {
-      setError('');
-      const page = await apiClient.getProviders({ ...nextFilters, size: 12 });
-      setProviders(page.content);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Não foi possível carregar prestadores.');
-    }
-  }
-
-  useEffect(() => {
-    void loadProviders();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    void loadProviders(filters);
-  }
-
   return (
-    <section className="page-shell">
-      <div className="section-heading align-left">
-        <span className="eyebrow">Busca pública</span>
-        <h1>Prestadores aprovados perto de você.</h1>
-        <p>Compare perfis em cards com categoria, preço inicial, regiões atendidas e agenda publicada.</p>
-      </div>
+    <main className="wire-page providers-page">
+      <div className="desktop-wire-heading desktop-only-title"><strong>Wireframe 02 — <span>Busca + Filtros Desktop</span></strong></div>
+      <div className="mobile-wire-label">Wireframe 02 — Busca + Filtros</div>
 
-      <div className="search-layout">
-        <form className="filter-panel surface-panel" onSubmit={submit}>
-          <span className="icon-pill"><Icon name="sliders" /></span>
-          <label>
-            Cidade
-            <input value={filters.city} onChange={(event) => setFilters({ ...filters, city: event.target.value })} placeholder="Belo Horizonte" />
-          </label>
-          <label>
-            Categoria
-            <input value={filters.category} onChange={(event) => setFilters({ ...filters, category: event.target.value })} placeholder="Beleza" />
-          </label>
-          <label>
-            Serviço
-            <input value={filters.service} onChange={(event) => setFilters({ ...filters, service: event.target.value })} placeholder="Maquiagem" />
-          </label>
-          <label>
-            Data disponível
-            <input type="date" value={filters.availableDate} onChange={(event) => setFilters({ ...filters, availableDate: event.target.value })} />
-          </label>
-          <label>
-            Avaliação mínima
-            <input type="number" min="0" max="5" step="0.1" value={filters.minRating} onChange={(event) => setFilters({ ...filters, minRating: event.target.value })} placeholder="4.5" />
-          </label>
-          <label>
-            Preço até
-            <input type="number" min="0" value={filters.maxPrice} onChange={(event) => setFilters({ ...filters, maxPrice: event.target.value })} placeholder="150" />
-          </label>
-          <button className="primary-button" type="submit">
-            Filtrar
-            <Icon name="search" />
-          </button>
-        </form>
+      <BrowserFrame className="providers-desktop-frame">
+        <WireframeNav />
+        <section className="desktop-search-bar search-page-bar">
+          <button type="button"><Icon name="location" /> São Paulo, SP <Icon name="chevronDown" /></button>
+          <label><Icon name="search" /><span>Buscar serviço ou profissional...</span></label>
+          <button className="filter-button" type="button"><Icon name="sliders" /> Filtros</button>
+        </section>
 
-        <div className="provider-grid">
-          {error && <p className="notice error">{error}</p>}
-          {!error && providers.length === 0 && (
-            <div className="surface-panel empty-state">
-              <Icon name="search" />
-              <h2>Nenhum prestador encontrado</h2>
-              <p>Ajuste os filtros para ampliar a busca.</p>
+        <div className="search-desktop-grid">
+          <FilterPanel />
+          <section className="search-results-area">
+            <div className="section-line-title"><h2>Categorias</h2><Link to="/prestadores">Ver todas <Icon name="arrowRight" /></Link></div>
+            <div className="category-grid search-categories">
+              {categories.map((item) => <Link to="/prestadores" className="category-card" key={item.label}><Icon name={item.icon} /><span>{item.label}</span></Link>)}
             </div>
-          )}
-          {providers.map((provider) => (
-            <article className="provider-card" key={provider.id}>
-              <div className="provider-card__head">
-                {provider.profileImageUrl ? (
-                  <img className="avatar-image" src={provider.profileImageUrl} alt="" />
-                ) : (
-                  <div className="avatar-placeholder" aria-hidden="true">{initials(provider.publicName)}</div>
-                )}
-                <div>
-                  <h2>{provider.publicName}</h2>
-                  <p>{provider.description}</p>
-                </div>
-              </div>
-              <div className="provider-meta">
-                <span className="metric-line"><Icon name="location" />{provider.city} · {provider.regions.slice(0, 2).join(', ')}</span>
-                <span className="metric-line"><Icon name="star" />{provider.ratingAverage.toFixed(1)} de {provider.ratingCount} avaliações</span>
-                <span className="metric-line"><Icon name="wallet" />A partir de {currency.format(provider.basePriceFrom)}</span>
-              </div>
-              <div className="chip-row">
-                {provider.categories.map((category) => <span className="chip coral" key={category}>{category}</span>)}
-                {provider.servicesPreview.map((service) => <span className="chip" key={service}>{service}</span>)}
-              </div>
-              <Link className="secondary-button" to={`/prestadores/${provider.id}`}>
-                Ver agenda
-                <Icon name="calendar" />
-              </Link>
-            </article>
-          ))}
+            <div className="section-line-title"><h2>6 prestadores encontrados</h2><button type="button">Mais bem avaliados <Icon name="chevronDown" /></button></div>
+            <div className="search-provider-grid">
+              {providers.map((provider) => <SearchProviderCard provider={provider} key={provider.name} />)}
+            </div>
+          </section>
         </div>
-      </div>
-    </section>
+
+        <section className="wire-banner compact-banner">
+          <div className="phone-icon-card"><NuboLogo /></div>
+          <div><h2>Não encontrou o que precisa?</h2><p>Conte para a gente. Vamos ajudar a encontrar o profissional ideal.</p></div>
+          <Link className="wire-cta" to="/prestadores">Quero pedir ajuda <Icon name="arrowRight" /></Link>
+        </section>
+      </BrowserFrame>
+
+      <section className="mobile-showcase search-mobile-showcase">
+        <NuboLogo />
+        <div className="mobile-side-copy"><h1>Busca <span>simples</span> para encontrar o profissional ideal</h1><i /></div>
+        <SearchPhonePreview />
+      </section>
+    </main>
   );
 }
